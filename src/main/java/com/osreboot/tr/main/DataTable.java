@@ -8,8 +8,8 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.Sound;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import com.osreboot.tr.apis.FileAPI;
 import com.osreboot.tr.apis.StatsFile;
@@ -34,6 +35,7 @@ public class DataTable {
 	public Player p;
 	public int[] nodes = new int[Node.nodes.size()];
 	public Inventory i;
+	public String title;
 	public int skp;
 	public int discovered = 0;
 	public int total = 0;
@@ -43,8 +45,9 @@ public class DataTable {
 	private Random random;
 
 	//First UUID is the entity, second UUID is the player
-	public static HashMap<UUID, UUID> floaters = new HashMap<UUID, UUID>();
-	public static HashMap<UUID, UUID> floatersSnd = new HashMap<UUID, UUID>();
+	public static HashMap<FallingBlock, UUID> floaters = new HashMap<FallingBlock, UUID>();
+	//public static HashMap<FallingBlock, ArmorStand> shulkers = new HashMap<FallingBlock, ArmorStand>();
+	public static HashMap<FallingBlock, UUID> floatersSnd = new HashMap<FallingBlock, UUID>();
 
 	public DataTable(Player p){
 		this.p = p;
@@ -107,7 +110,8 @@ public class DataTable {
 	}
 
 	public void open(){
-		i = Bukkit.createInventory(null, 54, "Syntax Tree : " + skp + " Skill Points");
+		title = "Syntax Tree : " + skp + " Skill Points";
+		i = Bukkit.createInventory(null, 54, title);
 		updateInv();
 		p.openInventory(i);
 	}
@@ -136,8 +140,9 @@ public class DataTable {
 			}
 		}
 
-		ItemStack title = new ItemStack(Material.SKULL_ITEM, 1, (short)SkullType.PLAYER.ordinal());
-		ItemMeta m = title.getItemMeta();
+		ItemStack title = new ItemStack(Material.PLAYER_HEAD);
+		SkullMeta m = (SkullMeta) title.getItemMeta();
+		m.setOwningPlayer(getPlayer());
 
 		String name = "";
 		if(total >= 40) name += ChatColor.AQUA;
@@ -177,7 +182,7 @@ public class DataTable {
 			if(Node.findNode(i).getEffects() != null && nodes[i] != 0)
 				Node.findNode(i).getEffects().onInteract(evt, this);
 		}
-		if(first && evt.getPlayer().getItemInHand().getType() == Material.AIR && p.isSneaking() && evt.getAction() == Action.RIGHT_CLICK_BLOCK) ping(100);
+		if(first && evt.getPlayer().getInventory().getItemInMainHand().getType() == Material.AIR && p.isSneaking() && evt.getAction() == Action.RIGHT_CLICK_BLOCK) ping(100);
 	}
 
 	public void onInteractEntity(PlayerInteractEntityEvent evt){
@@ -200,7 +205,7 @@ public class DataTable {
 				discovered = 0;
 				total++;
 				skp++;
-				p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10, 1);
+				p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 1);
 
 				if(total >= 180) p.sendMessage(ChatColor.LIGHT_PURPLE + "The power has consumed you. The aura lives inside you. The world crumples at your will.");
 				else if(total >= 160) p.sendMessage(ChatColor.LIGHT_PURPLE + "The aura is a second sense. You lift hills in your sleep. Energy buzzes at your fingertips.");

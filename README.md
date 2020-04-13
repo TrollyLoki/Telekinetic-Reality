@@ -1,2 +1,2 @@
 # Telekinetic-Reality
-Official repository for the Bukkit plugin Telekinetic Reality by osreboot.
+The Bukkit plugin Telekinetic Reality by osreboot updated to 1.15.2 by TrollyLoki

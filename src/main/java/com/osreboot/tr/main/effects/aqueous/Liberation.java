@@ -28,7 +28,7 @@ public class Liberation extends NodeEffects{
 		if(d.nodes[13] > 0){
 			if(cooldown.containsKey(d.getPlayer().getName()) && cooldown.get(d.getPlayer().getName()) == 0){
 				if(evt.getAction() == Action.LEFT_CLICK_AIR || evt.getAction() == Action.LEFT_CLICK_BLOCK){
-					if(Regulation.active.get(d.getPlayer().getName()) > 0 && d.getPlayer().getItemInHand().getType() == Material.AIR){
+					if(Regulation.active.get(d.getPlayer().getName()) > 0 && d.getPlayer().getInventory().getItemInMainHand().getType() == Material.AIR){
 						if(Main.liquids.contains(d.getPlayer().getLocation().getBlock().getType())){
 							double multi = 1 + (d.nodes[13]/60);
 							Vector v = d.getPlayer().getVelocity();

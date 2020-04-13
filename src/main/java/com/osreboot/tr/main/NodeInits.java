@@ -44,7 +44,7 @@ public class NodeInits {
 		new Node(4, "exemption", ChatColor.GREEN + "Exemption", new ItemStack(Material.GOLD_BLOCK), toArray(a5), 50, Node.findNode("levitation"), 5, null, 30, null, null);
 		
 		String[] a20 = Util.chop(ChatColor.BLUE + "\"There is no top. There are always furthur heights to reach.\" " + ChatColor.LIGHT_PURPLE + "Decreased proximity requirements for levitated materials.", length, "");
-		new Node(19, "reach", ChatColor.GREEN + "Reach", new ItemStack(Material.BIRCH_WOOD_STAIRS), toArray(a20), 47, Node.findNode("continuity"), 7, null, 30, null, null);
+		new Node(19, "reach", ChatColor.GREEN + "Reach", new ItemStack(Material.BIRCH_STAIRS), toArray(a20), 47, Node.findNode("continuity"), 7, null, 30, null, null);
 
 		String[] a6 = Util.chop(ChatColor.BLUE + "\"If there is no struggle, there is no progress.\" " + ChatColor.LIGHT_PURPLE + "Are you ready to make a choice?", length, "");
 		String[] s1 = {"indifference"};
@@ -61,11 +61,11 @@ public class NodeInits {
 
 		String[] a8 = Util.chop(ChatColor.BLUE + "\"A drop of water, if it could write out its own history, would explain the universe to us.\" " + ChatColor.LIGHT_PURPLE + "Liquid. Climate. Persistence.", length, "");
 		String[] s3 = {"equilibrial", "detrimental", "oculus"};
-		new Node(7, "aqueous", ChatColor.AQUA + "Aqueous", new ItemStack(Material.SNOW_BALL), toArray(a8), 30, Node.findNode("indifference"), 1, new Syntax(), 1, s3, null);
+		new Node(7, "aqueous", ChatColor.AQUA + "Aqueous", new ItemStack(Material.SNOWBALL), toArray(a8), 30, Node.findNode("indifference"), 1, new Syntax(), 1, s3, null);
 
 		String[] a9 = Util.chop(ChatColor.BLUE + "\"Every act of creation is first an act of destruction.\" " + ChatColor.LIGHT_PURPLE + "Havoc. Erosion. Pressure.", length, "");
 		String[] s4 = {"equilibrial", "aqueous", "oculus"};
-		new Node(8, "detrimental", ChatColor.AQUA + "Detrimental", new ItemStack(Material.SULPHUR), toArray(a9), 32, Node.findNode("indifference"), 1, new Syntax(), 1, s4, null);
+		new Node(8, "detrimental", ChatColor.AQUA + "Detrimental", new ItemStack(Material.GUNPOWDER), toArray(a9), 32, Node.findNode("indifference"), 1, new Syntax(), 1, s4, null);
 
 		String[] a10 = Util.chop(ChatColor.BLUE + "\"Reality is merely an illusion, albeit a very persistent one.\" " + ChatColor.LIGHT_PURPLE + "Light. Disorder. Perception.", length, "");
 		String[] s5 = {"equilibrial", "aqueous", "detrimental"};
@@ -85,7 +85,7 @@ public class NodeInits {
 		
 		String[] a21 = Util.chop(ChatColor.BLUE + "\"It does not matter how slowly you go as long as you do not stop.\" " + ChatColor.LIGHT_PURPLE + " Launch yourself upward with a telekinetic shockwave.", length, "");
 		String[] d12 = Util.chop(ChatColor.DARK_GRAY + "Left click the ground when \"Coordination\" is active to gain a massive temporary jump boost.", length, "");
-		new Node(20, "augmentation", ChatColor.GREEN + "Augmentation", new ItemStack(Material.GOLD_BOOTS), toArray(a21), 21, Node.findNode("subtraction"), 15, new Augmentation(), 40, null, toArray(d12));
+		new Node(20, "augmentation", ChatColor.GREEN + "Augmentation", new ItemStack(Material.GOLDEN_BOOTS), toArray(a21), 21, Node.findNode("subtraction"), 15, new Augmentation(), 40, null, toArray(d12));
 		//TODO aug ping
 		
 		String[] a22 = Util.chop(ChatColor.BLUE + "\"Either I will find a way, or I will make one.\" " + ChatColor.LIGHT_PURPLE + " Compress the surrounding air into a method of propulsion.", length, "");
@@ -124,7 +124,7 @@ public class NodeInits {
 		
 		String[] a17 = Util.chop(ChatColor.BLUE + "Transition the aura into an appearance that meets your demands. " + ChatColor.LIGHT_PURPLE + "Ability to activate Oculus aura.", length, "");
 		String[] d9 = Util.chop(ChatColor.DARK_GRAY + "Hold shift and move mouse to activate. Hold shift and keep mouse still to deactivate.", length, "");
-		new Node(16, "hallucination", ChatColor.GREEN + "Hallucination", new ItemStack(Material.EYE_OF_ENDER), toArray(a17), 25, Node.findNode("oculus"), 1, new Hallucination(), 30, null, toArray(d9));
+		new Node(16, "hallucination", ChatColor.GREEN + "Hallucination", new ItemStack(Material.ENDER_EYE), toArray(a17), 25, Node.findNode("oculus"), 1, new Hallucination(), 30, null, toArray(d9));
 		
 		String[] a18 = Util.chop(ChatColor.BLUE + "\"It matters not how fast light may travel, darkness shall always be there awaiting its arrival.\" " + ChatColor.LIGHT_PURPLE + "Implant a torch into a basic material from a distance.", length, "");
 		String[] d10 = Util.chop(ChatColor.DARK_GRAY + "Press Q while holding a torch and looking at a basic material.", length, "");
@@ -132,7 +132,7 @@ public class NodeInits {
 		
 		String[] a19 = Util.chop(ChatColor.BLUE + "You don't need light, and neither does anybody else! " + ChatColor.LIGHT_PURPLE + "Extinguish all light sources in a specified radius.", length, "");
 		String[] d11 = Util.chop(ChatColor.DARK_GRAY + "Hold shift and left click on a block.", length, "");
-		new Node(18, "reticence", ChatColor.GREEN + "Reticence", new ItemStack(Material.INK_SACK), toArray(a19), 26, Node.findNode("hallucination"), 15, new Reticence(), 30, null, toArray(d11));
+		new Node(18, "reticence", ChatColor.GREEN + "Reticence", new ItemStack(Material.INK_SAC), toArray(a19), 26, Node.findNode("hallucination"), 15, new Reticence(), 30, null, toArray(d11));
 		
 		//END OCULUS
 	}

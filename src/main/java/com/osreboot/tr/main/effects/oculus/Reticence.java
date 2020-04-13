@@ -31,9 +31,9 @@ public class Reticence extends NodeEffects{
 	public void onInteract(PlayerInteractEvent evt, final DataTable d){
 		if(d.nodes[18] > 0){
 			if(Hallucination.active.containsKey(d.getPlayer().getName()) && Hallucination.active.get(d.getPlayer().getName()) > 0){
-				if(evt.getAction() == Action.LEFT_CLICK_BLOCK && evt.getPlayer().isSneaking() && evt.getPlayer().getItemInHand().getType() == Material.AIR){
+				if(evt.getAction() == Action.LEFT_CLICK_BLOCK && evt.getPlayer().isSneaking() && evt.getPlayer().getInventory().getItemInMainHand().getType() == Material.AIR){
 					if(cooldown.get(d.getPlayer().getName()) == 0){
-						d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.AMBIENCE_CAVE, 10, 1);
+						d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.AMBIENT_CAVE, 10, 1);
 						Location l = Util.getTargetBlock(evt.getPlayer(), 100).getLocation();
 						int range = 10 + (d.nodes[18]*2);
 						for(int x = -range; x <= range; x++){

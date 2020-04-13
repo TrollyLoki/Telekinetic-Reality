@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BlockIterator;
@@ -27,6 +28,7 @@ public class Util {
 		return block;
 	}
 	
+	@Deprecated
 	public static ArrayList<Entity> getEntitysFromUUIDs(ArrayList<UUID> u){
 		ArrayList<Entity> e = new ArrayList<Entity>();
 		for(UUID uid : u){
@@ -56,15 +58,15 @@ public class Util {
 		}
 	}
 	
-	public static void clearHash(HashMap<UUID, UUID> h, UUID n){
-		ArrayList<UUID> t = new ArrayList<UUID>();
-		for(UUID u : h.keySet()) if(h.get(u) == n) t.add(u);
-		for(UUID u : t) h.remove(u);
+	public static void clearHash(HashMap<FallingBlock, UUID> h, UUID n){
+		ArrayList<FallingBlock> t = new ArrayList<FallingBlock>();
+		for(FallingBlock u : h.keySet()) if(h.get(u) == n) t.add(u);
+		for(FallingBlock u : t) h.remove(u);
 	}
 	
-	public static ArrayList<UUID> getPlayerUUIDS(HashMap<UUID, UUID> h, UUID n){
-		ArrayList<UUID> a = new ArrayList<UUID>();
-		for(UUID u : h.keySet()) if(h.get(u) == n && !a.contains(u)) a.add(u);
+	public static ArrayList<FallingBlock> getPlayerUUIDS(HashMap<FallingBlock, UUID> h, UUID n){
+		ArrayList<FallingBlock> a = new ArrayList<FallingBlock>();
+		for(FallingBlock u : h.keySet()) if(h.get(u) == n && !a.contains(u)) a.add(u);
 		return a;
 	}
 	

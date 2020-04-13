@@ -34,7 +34,7 @@ public class Regulation extends NodeEffects{
 				buildup.put(d.getPlayer().getName(), buildup.get(d.getPlayer().getName()) + 4);
 			}else{
 				active.put(d.getPlayer().getName(), 100 + (d.nodes[12]*10) + new Random().nextInt(d.nodes[12]*100));
-				d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.NOTE_PIANO, 10, 1);
+				d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 10, 1);
 				d.ping(20);
 			}
 		}
@@ -42,10 +42,10 @@ public class Regulation extends NodeEffects{
 		if(active.get(d.getPlayer().getName()) > 0){
 			active.put(d.getPlayer().getName(), active.get(d.getPlayer().getName()) - 1);
 
-			if(active.get(d.getPlayer().getName()) == 1) d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.FIZZ, 10, 1);
+			if(active.get(d.getPlayer().getName()) == 1) d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 10, 1);
 
-			d.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20, 1), true);
-			if(new Random().nextInt((31 - d.nodes[12])*2) == 0) d.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 1), true);
+			d.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20, 1));
+			if(new Random().nextInt((31 - d.nodes[12])*2) == 0) d.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 1));
 
 			if(d.getPlayer().isSneaking() && !Main.liquids.contains(d.getPlayer().getLocation().getBlock().getType())) extinguish.put(d.getPlayer().getName(), extinguish.get(d.getPlayer().getName()) + 1);
 		}
@@ -53,7 +53,7 @@ public class Regulation extends NodeEffects{
 			extinguish.put(d.getPlayer().getName(), 0);
 			buildup.put(d.getPlayer().getName(), 0);
 			active.put(d.getPlayer().getName(), 0);
-			d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.FIZZ, 10, 1);
+			d.getPlayer().playSound(d.getPlayer().getLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 10, 1);
 			d.ping(30);
 		}
 	}

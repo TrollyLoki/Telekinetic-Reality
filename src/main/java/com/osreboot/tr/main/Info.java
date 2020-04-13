@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,12 +19,12 @@ public class Info {
 		
 		Main.holidayify(info);
 		
-		back = new ItemStack(Material.SKULL_ITEM, 1, (short)SkullType.ZOMBIE.ordinal());
-		infoi = new ItemStack(Material.SKULL_ITEM, 1, (short)SkullType.SKELETON.ordinal());
+		back = new ItemStack(Material.ZOMBIE_HEAD);
+		infoi = new ItemStack(Material.SKELETON_SKULL);
 		twitter = new ItemStack(Material.FEATHER);
-		twitch = new ItemStack(Material.INK_SACK, 1, (byte)4);
+		twitch = new ItemStack(Material.LAPIS_LAZULI);
 		bukkitdev = new ItemStack(Material.LAVA_BUCKET);
-		changelog = new ItemStack(Material.BOOK_AND_QUILL);
+		changelog = new ItemStack(Material.WRITABLE_BOOK);
 		version = new ItemStack(Material.PAPER);
 		news = new ItemStack(Material.PAPER);
 		

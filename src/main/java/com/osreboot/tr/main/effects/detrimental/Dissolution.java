@@ -32,7 +32,7 @@ public class Dissolution extends NodeEffects{
 		if(d.nodes[15] > 0){
 			if(Agitation.active.containsKey(d.getPlayer().getName()) && Agitation.active.get(d.getPlayer().getName()) > 0){
 				if(cooldown.get(d.getPlayer().getName()) == 0){
-					if(d.getPlayer().isSneaking() && evt.getAction() == Action.LEFT_CLICK_BLOCK && Main.breakables.containsKey(evt.getClickedBlock().getType())  && d.getPlayer().getItemInHand().getType() == Material.AIR){
+					if(d.getPlayer().isSneaking() && evt.getAction() == Action.LEFT_CLICK_BLOCK && Main.breakables.containsKey(evt.getClickedBlock().getType())  && d.getPlayer().getInventory().getItemInMainHand().getType() == Material.AIR){
 						if(new Random().nextInt(18 - (d.nodes[15]/2)) == 0){
 
 							for(int x = -1; x <= 1; x++){

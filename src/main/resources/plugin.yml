@@ -1,8 +1,10 @@
 name: Telekinetic_Reality
 main: com.osreboot.tr.main.Main
-version: 1.1.0.0
-description: Telekinetic Reality by Os_Reboot
-softdepend: [WorldGuard, PreciousStones]
+version: 2.0
+description: Telekinetic Reality by Os_Reboot updated by TrollyLoki
+authors: [os_reboot, TrollyLoki]
+softdepend: [WorldGuard]
+api-version: 1.15
 commands:
    syntax:
       description: Opens syntax tree.

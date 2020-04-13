@@ -41,11 +41,11 @@ public class Subtraction extends NodeEffects{
 											if(new Random().nextInt(32 + ((int)distance) - d.nodes[11]) == 0 && distance < 6 && distance > 1 && !Main.blacklist.contains(l.getBlock().getType()) && !Main.liquids.contains(l.getBlock().getType())){
 												Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable(){
 													public void run(){
-														FallingBlock b = p.getWorld().spawnFallingBlock(l.getBlock().getLocation(), l.getBlock().getType(), l.getBlock().getData());
+														FallingBlock b = p.getWorld().spawnFallingBlock(l.getBlock().getLocation().add(0.5, 0, 0.5), l.getBlock().getBlockData());
 														b.setDropItem(false);
 														b.setVelocity(new Vector(0, (distance/10), 0));
 														l.getBlock().setType(Material.AIR);
-														ProtectionManager.abandoned.put(b.getUniqueId(), d.getPlayer().getUniqueId());
+														ProtectionManager.abandoned.put(b, d.getPlayer().getUniqueId());
 													}
 												}, (long)(distance/10));
 												if(Coordination.active.containsKey(p.getName()) && Coordination.active.get(p.getName()) > 0) subDmg += initDmg/15; else subDmg += initDmg/30;

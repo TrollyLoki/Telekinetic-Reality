@@ -28,7 +28,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.osreboot.tr.apis.FileAPI;
 import com.osreboot.tr.main.hooks.Hook;
-import com.osreboot.tr.main.hooks.PreciousStonesHook;
 import com.osreboot.tr.main.hooks.ProtectionManager;
 import com.osreboot.tr.main.hooks.WorldGuardHook;
 
@@ -61,22 +60,61 @@ public class Main extends JavaPlugin implements Listener{
 		blacklist.add(Material.JUKEBOX);
 		//as of 0.4.0.0
 		blacklist.add(Material.BEACON);
-		blacklist.add(Material.BED_BLOCK);
-		blacklist.add(Material.COMMAND);
-		blacklist.add(Material.IRON_DOOR_BLOCK);
-		blacklist.add(Material.WOODEN_DOOR);
-		blacklist.add(Material.SIGN_POST);
-		blacklist.add(Material.WALL_SIGN);
+		blacklist.add(Material.WHITE_BANNER);
+		blacklist.add(Material.ORANGE_BANNER);
+		blacklist.add(Material.MAGENTA_BANNER);
+		blacklist.add(Material.LIGHT_BLUE_BANNER);
+		blacklist.add(Material.YELLOW_BANNER);
+		blacklist.add(Material.LIME_BANNER);
+		blacklist.add(Material.PINK_BANNER);
+		blacklist.add(Material.GRAY_BANNER);
+		blacklist.add(Material.LIGHT_GRAY_BANNER);
+		blacklist.add(Material.CYAN_BANNER);
+		blacklist.add(Material.PURPLE_BANNER);
+		blacklist.add(Material.BLUE_BANNER);
+		blacklist.add(Material.BROWN_BANNER);
+		blacklist.add(Material.GREEN_BANNER);
+		blacklist.add(Material.BLACK_BANNER);
+		blacklist.add(Material.RED_BANNER);
+		blacklist.add(Material.COMMAND_BLOCK);
+		blacklist.add(Material.REPEATING_COMMAND_BLOCK);
+		blacklist.add(Material.CHAIN_COMMAND_BLOCK);
+		blacklist.add(Material.IRON_DOOR);
+		blacklist.add(Material.OAK_DOOR);
+		blacklist.add(Material.SPRUCE_DOOR);
+		blacklist.add(Material.BIRCH_DOOR);
+		blacklist.add(Material.JUNGLE_DOOR);
+		blacklist.add(Material.ACACIA_DOOR);
+		blacklist.add(Material.DARK_OAK_DOOR);
+		blacklist.add(Material.OAK_SIGN);
+		blacklist.add(Material.SPRUCE_SIGN);
+		blacklist.add(Material.BIRCH_SIGN);
+		blacklist.add(Material.JUNGLE_SIGN);
+		blacklist.add(Material.ACACIA_SIGN);
+		blacklist.add(Material.DARK_OAK_SIGN);
 		blacklist.add(Material.ITEM_FRAME);
 		//as of 1.1.0.0
 		blacklist.add(Material.ARMOR_STAND);
-		blacklist.add(Material.BANNER);
+		blacklist.add(Material.WHITE_BANNER);
+		blacklist.add(Material.ORANGE_BANNER);
+		blacklist.add(Material.MAGENTA_BANNER);
+		blacklist.add(Material.LIGHT_BLUE_BANNER);
+		blacklist.add(Material.YELLOW_BANNER);
+		blacklist.add(Material.LIME_BANNER);
+		blacklist.add(Material.PINK_BANNER);
+		blacklist.add(Material.GRAY_BANNER);
+		blacklist.add(Material.LIGHT_GRAY_BANNER);
+		blacklist.add(Material.CYAN_BANNER);
+		blacklist.add(Material.PURPLE_BANNER);
+		blacklist.add(Material.BLUE_BANNER);
+		blacklist.add(Material.BROWN_BANNER);
+		blacklist.add(Material.GREEN_BANNER);
+		blacklist.add(Material.BLACK_BANNER);
+		blacklist.add(Material.RED_BANNER);
 		blacklist.add(Material.BARRIER);
 
 		liquids.add(Material.WATER);
-		liquids.add(Material.STATIONARY_WATER);
 		liquids.add(Material.LAVA);
-		liquids.add(Material.STATIONARY_LAVA);
 
 		breakables.put(Material.DIRT, Material.DIRT);
 		breakables.put(Material.GRASS, Material.DIRT);
@@ -86,21 +124,21 @@ public class Main extends JavaPlugin implements Listener{
 		breakables.put(Material.COBBLESTONE, Material.COBBLESTONE);
 
 		lights.put(Material.BEACON, Material.BEACON);
-		lights.put(Material.BREWING_STAND, Material.BREWING_STAND_ITEM);
+		lights.put(Material.BREWING_STAND, Material.BREWING_STAND);
 		lights.put(Material.BROWN_MUSHROOM, Material.BROWN_MUSHROOM);
-		lights.put(Material.DIODE_BLOCK_ON, Material.DIODE);
+		lights.put(Material.REPEATER, Material.REPEATER);
 		lights.put(Material.DRAGON_EGG, Material.DRAGON_EGG);
 		lights.put(Material.ENDER_CHEST, Material.ENDER_CHEST);
-		lights.put(Material.GLOWING_REDSTONE_ORE, Material.REDSTONE);
+		lights.put(Material.REDSTONE_ORE, Material.REDSTONE);
 		lights.put(Material.GLOWSTONE, Material.GLOWSTONE_DUST);
 		lights.put(Material.JACK_O_LANTERN, Material.JACK_O_LANTERN);
 		lights.put(Material.LAVA, Material.AIR);
-		lights.put(Material.REDSTONE_COMPARATOR_ON, Material.REDSTONE_COMPARATOR);
-		lights.put(Material.REDSTONE_LAMP_ON, Material.REDSTONE_LAMP_OFF);
-		lights.put(Material.REDSTONE_TORCH_ON, Material.REDSTONE_TORCH_ON);
-		lights.put(Material.STATIONARY_LAVA, Material.AIR);
+		lights.put(Material.COMPARATOR, Material.COMPARATOR);
+		lights.put(Material.REDSTONE_LAMP, Material.REDSTONE_LAMP);
+		lights.put(Material.REDSTONE_TORCH, Material.REDSTONE_TORCH);
+		lights.put(Material.LAVA, Material.AIR);
 		lights.put(Material.TORCH, Material.TORCH);
-		lights.put(Material.BURNING_FURNACE, Material.FURNACE);
+		lights.put(Material.FURNACE, Material.FURNACE);
 		lights.put(Material.FIRE, Material.AIR);
 
 		NodeInits.init();
@@ -129,7 +167,6 @@ public class Main extends JavaPlugin implements Listener{
 		for(Player p : Bukkit.getOnlinePlayers()) new DataTable(p);
 		
 		new WorldGuardHook();
-		new PreciousStonesHook();
 		
 		this.logger.info("Telekinetic Reality : ENABLED");
 	}
@@ -205,14 +242,14 @@ public class Main extends JavaPlugin implements Listener{
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent evt){
-		if(evt.getInventory().getName().contains("Syntax Tree :")){
+		if(evt.getView().getTitle().contains("Syntax Tree :")){
 			if(evt.getAction() == InventoryAction.PICKUP_ALL){
 				if(evt.getInventory().getItem(evt.getSlot()) != null){
 					ItemStack i = evt.getInventory().getItem(evt.getSlot());
 					Player p = (Player)evt.getWhoClicked();
 					DataTable d = DataTable.findPlayer(p);
-					if(evt.getInventory().getName() == d.i.getName()){
-						if(i.getType() == Material.EMERALD || i.getType() == Material.BOOK || i.getType() == Material.SKULL_ITEM || decor.contains(i.getType())){
+					if(evt.getView().getTitle() == d.title){
+						if(i.getType() == Material.EMERALD || i.getType() == Material.BOOK || i.getType() == Material.PLAYER_HEAD || i.getType() == Material.SKELETON_SKULL || decor.contains(i.getType())){
 							evt.setCancelled(true);
 							if(i.getItemMeta().getDisplayName().equals(ChatColor.YELLOW + "Down")){
 								if(d.scroll > 0){
@@ -231,7 +268,7 @@ public class Main extends JavaPlugin implements Listener{
 								p.closeInventory();
 								p.openInventory(Info.info);
 							}
-						}else if(i.getType() == Material.SKULL_ITEM){
+						}else if(i.getType() == Material.PLAYER_HEAD){
 							evt.setCancelled(true);
 						}else{
 							evt.setCancelled(true);
@@ -259,7 +296,7 @@ public class Main extends JavaPlugin implements Listener{
 			}else{
 				evt.setCancelled(true);
 			}
-		}else if(evt.getInventory().getName().contains("Getting to know Telekinesis")){//TODO compress this into a method?
+		}else if(evt.getView().getTitle().contains("Getting to know Telekinesis")){//TODO compress this into a method?
 			evt.setCancelled(true);
 			if(evt.getAction() == InventoryAction.PICKUP_ALL && evt.getInventory().getItem(evt.getSlot()) != null){
 				ItemStack i = evt.getInventory().getItem(evt.getSlot());
@@ -271,7 +308,7 @@ public class Main extends JavaPlugin implements Listener{
 					d.open();
 				}
 			}
-		}else if(evt.getInventory().getName().contains("TR Developer Information")){
+		}else if(evt.getView().getTitle().contains("TR Developer Information")){
 			evt.setCancelled(true);
 			if(evt.getAction() == InventoryAction.PICKUP_ALL){
 				if(evt.getInventory().getItem(evt.getSlot()) != null){
