@@ -1,5 +1,7 @@
 package com.osreboot.tr.main;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -9,6 +11,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
@@ -20,9 +24,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import com.osreboot.tr.apis.FileAPI;
-import com.osreboot.tr.apis.StatsFile;
-
 public class DataTable {
 
 	public static ArrayList<DataTable> tables = new ArrayList<DataTable>();
@@ -33,6 +34,7 @@ public class DataTable {
 	}
 
 	public Player p;
+	public File dataFile;
 	public int[] nodes = new int[Node.nodes.size()];
 	public Inventory i;
 	public String title;
@@ -49,30 +51,32 @@ public class DataTable {
 	//public static HashMap<FallingBlock, ArmorStand> shulkers = new HashMap<FallingBlock, ArmorStand>();
 	public static HashMap<FallingBlock, UUID> floatersSnd = new HashMap<FallingBlock, UUID>();
 
-	public DataTable(Player p){
+	public DataTable(Player p) {
 		this.p = p;
 
-		StatsFile f = new StatsFile(p.getUniqueId().toString(), "tr_playerdata");
-		if(!f.doesExist()){
-			if(FileAPI.doesFileExist(p.getName() + ".yml", "tr_playerdata")){//TODO the FileAPI is sloppy and outdated
-				f = new StatsFile(p.getName(), "tr_playerdata");
-				f.load();
-			}else{
-				f.generate();
-				f.load();
-				for(Node n : Node.nodes) f.getConfiguration().set(n.getName(), "0");
-				f.getConfiguration().set("skp", "0");
-				f.getConfiguration().set("discovered", "0");
-				f.getConfiguration().set("total", "0");
-				f.getConfiguration().set("syntax", "0");
+		FileConfiguration data;
+		dataFile = new File(Main.dataFolder.getPath() + File.separatorChar + p.getUniqueId() + ".yml");
+		if(!dataFile.exists()){
+			try {
+				dataFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		}else f.load();
+			
+			data = new YamlConfiguration();
+			for(Node n : Node.nodes) data.set(n.getName(), "0");
+			data.set("skp", "0");
+			data.set("discovered", "0");
+			data.set("total", "0");
+			data.set("syntax", "0");
+		}
+		else data = YamlConfiguration.loadConfiguration(dataFile);
 
-		for(Node n : Node.nodes) this.nodes[n.getIndex()] = verifyAndCache(f, n.getName());
-		this.skp = verifyAndCache(f, "skp");
-		this.discovered = verifyAndCache(f, "discovered");
-		this.total = verifyAndCache(f, "total");
-		this.syntax = verifyAndCache(f, "syntax");
+		for(Node n : Node.nodes) this.nodes[n.getIndex()] = verifyAndCache(data, n.getName());
+		this.skp = verifyAndCache(data, "skp");
+		this.discovered = verifyAndCache(data, "discovered");
+		this.total = verifyAndCache(data, "total");
+		this.syntax = verifyAndCache(data, "syntax");
 
 		this.random = new Random();
 
@@ -91,22 +95,26 @@ public class DataTable {
 		syntax = syntaxArg;
 	}
 
-	private int verifyAndCache(StatsFile f, String path){
-		if(!f.getConfiguration().contains(path)) f.getConfiguration().set(path, "0");
-		return f.getConfiguration().getInt(path);
+	private int verifyAndCache(FileConfiguration data, String path){
+		if(!data.contains(path)) data.set(path, "0");
+		return data.getInt(path);
 	}
 
 	public void save(){
 		Util.clearHash(floaters, p.getUniqueId());
 		Util.clearHash(floatersSnd, p.getUniqueId());
-		StatsFile f = new StatsFile(p.getUniqueId().toString(), "tr_playerdata");
-		f.load();
-		f.getConfiguration().set("skp", skp);
-		f.getConfiguration().set("discovered", discovered);
-		f.getConfiguration().set("total", total);
-		f.getConfiguration().set("syntax", syntax);
-		for(Node n : Node.nodes) f.getConfiguration().set(n.getName(), nodes[n.index]);
-		f.save();
+		FileConfiguration data = YamlConfiguration.loadConfiguration(dataFile);
+		data.set("skp", skp);
+		data.set("discovered", discovered);
+		data.set("total", total);
+		data.set("syntax", syntax);
+		for(Node n : Node.nodes) data.set(n.getName(), nodes[n.index]);
+		
+		try {
+			data.save(dataFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void open(){

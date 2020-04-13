@@ -1,5 +1,6 @@
 package com.osreboot.tr.main;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -26,7 +27,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.osreboot.tr.apis.FileAPI;
 import com.osreboot.tr.main.hooks.Hook;
 import com.osreboot.tr.main.hooks.ProtectionManager;
 import com.osreboot.tr.main.hooks.WorldGuardHook;
@@ -34,6 +34,7 @@ import com.osreboot.tr.main.hooks.WorldGuardHook;
 public class Main extends JavaPlugin implements Listener{
 
 	public final Logger logger = Logger.getLogger("Minecraft");
+	public static File dataFolder;
 	public static Main plugin;
 
 	public static ArrayList<Material> blacklist = new ArrayList<Material>();
@@ -46,8 +47,8 @@ public class Main extends JavaPlugin implements Listener{
 	public void onEnable(){
 		Bukkit.getPluginManager().registerEvents(this, this);
 		plugin = this;
-
-		FileAPI.generateFolder("tr_playerdata");
+		dataFolder = new File(getDataFolder().getPath() + File.separatorChar + "playerdata");
+		dataFolder.mkdirs();
 
 		blacklist.add(Material.CHEST);
 		blacklist.add(Material.FURNACE);
