@@ -17,7 +17,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Libraries/bukkit/worldguard-bukkit-7.0.2.jar"/>
-	<classpathentry kind="lib" path="/Libraries/bukkit/worldedit-bukkit-7.1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
